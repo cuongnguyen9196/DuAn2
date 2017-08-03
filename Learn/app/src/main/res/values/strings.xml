@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Learn English</string>
+    <string name="setting">More</string>
+    <string name="about">About Us</string>
+    <string name="share">Share</string>
+    <string name="home">Home</string>
+    <string name="connectIP">http://192.168.100.4:3000</string>
+    <string name="facebook_app_id">1720127888231297</string>
+    <string name="exit">Exit</string>
+    <string name="btn_logout_from_google">Logout Google +</string>
+    <string name="wait">Waitting a moment... </string>
+</resources>
