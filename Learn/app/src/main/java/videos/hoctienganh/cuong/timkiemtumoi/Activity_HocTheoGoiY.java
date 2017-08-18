@@ -30,8 +30,6 @@ public class Activity_HocTheoGoiY extends AppCompatActivity {
     List<Model_Lesson> listitem;
     Adapter_Lesson adapter_lesson;
     private Socket mSocket;
-
-
     {
         try {
             mSocket = IO.socket("http://192.168.100.4:3000");
@@ -48,9 +46,7 @@ public class Activity_HocTheoGoiY extends AppCompatActivity {
         re.setHasFixedSize(true);
         re.setLayoutManager(new LinearLayoutManager(this));
         listitem = new ArrayList<>();
-
-
-        new LayDuLieu().execute(getResources().getString(R.string.connectIP));
+        new LayDuLieu().execute("http://192.168.100.4:3000");
     }
     public class LayDuLieu extends AsyncTask<String, Void, List<Model_Lesson>> {
 
@@ -71,9 +67,8 @@ public class Activity_HocTheoGoiY extends AppCompatActivity {
                 JSONArray jsonArray = new JSONArray(response.body().string());
                 for (int i = 0; i < jsonArray.length(); i++) {
                     listitem.add(new Model_Lesson(
-                            jsonArray.getJSONObject(i).getString("IdTenBai"),
-                            jsonArray.getJSONObject(i).getString("TenBai"),
-                            jsonArray.getJSONObject(i).getString("TomTatNoiDung")
+                            jsonArray.getJSONObject(i).getString("IdBai"),
+                            jsonArray.getJSONObject(i).getString("TenBai")
                     ));
                 }
             } catch (Exception e) {

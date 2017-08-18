@@ -2,6 +2,8 @@ package videos.hoctienganh.cuong.timkiemtumoi;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
 
 import com.github.nkzawa.emitter.Emitter;
@@ -13,12 +15,18 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.List;
 
+import videos.hoctienganh.cuong.Adapter.Adapter_Hoctheochude;
+import videos.hoctienganh.cuong.Model.Model_hocTheochude;
 import videos.hoctienganh.cuong.learnenglish.R;
 
 public class BaiHocTheoGoiY extends AppCompatActivity {
     String id;
-    TextView tomTat,NoiDung;
+    RecyclerView relist;
+    List<Model_hocTheochude> list;
+    Adapter_Hoctheochude adapterHoctheochude;
     private Socket mSocket;
     {
         try {
@@ -30,16 +38,16 @@ public class BaiHocTheoGoiY extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bai_hoc_theo_goi_y);
-        getSupportActionBar().hide();
-        AddControl();
+        relist = (RecyclerView) findViewById(R.id.reTheoChude);
+        relist.setHasFixedSize(true);
+        relist.setLayoutManager(new LinearLayoutManager(this));
+
         mSocket.connect();
         Event();
-    }
-    private  void AddControl(){
-        tomTat = (TextView) findViewById(R.id.txt_TomTatNoidung);
-        NoiDung = (TextView) findViewById(R.id.txt_NoiDung);
+
 
     }
+
     private void Event(){
         Bundle b = getIntent().getExtras();
         id =(b.getString("idls"));
@@ -55,13 +63,19 @@ public class BaiHocTheoGoiY extends AppCompatActivity {
                     JSONObject data = (JSONObject) args[0];
                     try {
                         JSONArray arr = data.getJSONArray("databai");
-                        tomTat.setText(arr.getJSONObject(0).getString("TomTaTNoiDung"));
-                        NoiDung.setText(arr.getJSONObject(0).getString("NoiDung"));
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                    try {
-                        tomTat.setText(data.getString("dulieu"));
+
+                        list=new ArrayList<Model_hocTheochude>();
+                        for (int i = 0 ; i <arr.length() ; i++){
+                            list.add(new Model_hocTheochude(
+                             arr.getJSONObject(i).getString("IdQues"),
+                             arr.getJSONObject(i).getString("CauHoi"),
+                                    arr.getJSONObject(i).getString("IdBai")
+                            ));
+
+
+                        }
+                        adapterHoctheochude = new Adapter_Hoctheochude(BaiHocTheoGoiY.this,list);
+                        relist.setAdapter(adapterHoctheochude);
                     } catch (JSONException e) {
                         return;
                     }

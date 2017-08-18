@@ -8,11 +8,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import java.util.List;
 import videos.hoctienganh.cuong.learnenglish.R;
 import videos.hoctienganh.cuong.Model.Model_Lesson;
+import videos.hoctienganh.cuong.timkiemtumoi.Activity_HocTheoGoiY;
 import videos.hoctienganh.cuong.timkiemtumoi.BaiHocTheoGoiY;
 
 public class Adapter_Lesson extends RecyclerView.Adapter<Adapter_Lesson.Item> {
@@ -33,9 +35,9 @@ public class Adapter_Lesson extends RecyclerView.Adapter<Adapter_Lesson.Item> {
     @Override
     public void onBindViewHolder(Adapter_Lesson.Item holder, int position) {
         Model_Lesson model_lesson = list_item.get(position);
+        holder.anh.setImageResource(R.drawable.iconbaihoc);
         holder.tenbai.setText(model_lesson.getTenbai());
-        holder.tomtat.setText(model_lesson.getTomtatND());
-        String idlesson = model_lesson.getId();
+        holder.baiso.setText("Lesson :"+model_lesson.getId());
     }
 
     @Override
@@ -45,17 +47,19 @@ public class Adapter_Lesson extends RecyclerView.Adapter<Adapter_Lesson.Item> {
 
     public class Item extends RecyclerView.ViewHolder implements View.OnClickListener {
         CardView cardView;
-        TextView tenbai,tomtat;
+        TextView tenbai,baiso;
+        ImageView anh;
         public Item(View itemView) {
             super(itemView);
             cardView = (CardView)itemView.findViewById(R.id.cardV);
-            tenbai = (TextView) itemView.findViewById(R.id.txt_tenbai);
-            tomtat = (TextView) itemView.findViewById(R.id.txt_tomtatNd);
+            tenbai = itemView.findViewById(R.id.txt_Lession);
+            baiso = itemView.findViewById(R.id.txt_tenChude);
+            anh = itemView.findViewById(R.id.imgV);
             cardView.setOnClickListener(this);
         }
         @Override
         public void onClick(View v) {
-            Toast.makeText(context,"Id : " + list_item.get(getAdapterPosition()).getId(),Toast.LENGTH_LONG).show();
+
             switch (v.getId()){
                 case R.id.cardV:
                     Bundle bundle = new Bundle();

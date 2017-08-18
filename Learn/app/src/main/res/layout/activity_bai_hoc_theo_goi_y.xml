@@ -6,19 +6,10 @@
     android:layout_height="match_parent"
     android:layout_margin="5dp"
     tools:context="videos.hoctienganh.cuong.timkiemtumoi.BaiHocTheoGoiY">
-
-    <TextView
-        android:layout_margin="5dp"
-        android:hint="TomTat"
-        android:id="@+id/txt_TomTatNoidung"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/reTheoChude"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <TextView
-        android:id="@+id/txt_NoiDung"
-        android:hint="Noi Dung"
-        android:layout_margin="5dp"
-        android:layout_below="@id/txt_TomTatNoidung"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent">
+    </android.support.v7.widget.RecyclerView>
 
 </RelativeLayout>

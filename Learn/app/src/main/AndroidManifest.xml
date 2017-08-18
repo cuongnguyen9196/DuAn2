@@ -71,7 +71,10 @@
             android:theme="@style/Theme.AppCompat.Light.Dialog" />
         <activity
             android:screenOrientation="portrait"
-            android:name="videos.hoctienganh.cuong.timkiemtumoi.BaiHocTheoGoiY"/>
+            android:name="videos.hoctienganh.cuong.timkiemtumoi.BaiHocTheoGoiY" />
+        <activity
+            android:screenOrientation="portrait"
+            android:name="videos.hoctienganh.cuong.timkiemtumoi.Main_CauTL"/>
     </application>
 
 </manifest>
